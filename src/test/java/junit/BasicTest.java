@@ -18,6 +18,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.io.File;
 import java.io.IOException;
 
+import static io.github.bonigarcia.wdm.DriverManagerType.CHROME;
+
 class BasicTest {
     private static Logger logger = LogManager.getLogger();
     private static ChromeDriverService service;
@@ -26,9 +28,9 @@ class BasicTest {
     @BeforeAll
     static void initAll() throws IOException {
         logger.info("Starting ChromeDriverService");
-        ChromeDriverManager.getInstance().setup();
+        ChromeDriverManager.getInstance(CHROME).setup();
         service = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File(ChromeDriverManager.getInstance().getBinaryPath()))
+                .usingDriverExecutable(new File(ChromeDriverManager.getInstance(CHROME).getBinaryPath()))
                 .usingAnyFreePort()
                 .build();
         service.start();
